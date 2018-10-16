@@ -1,1 +1,3 @@
 # Config file for haunted house 2018
+
+example_mech_motor=0
