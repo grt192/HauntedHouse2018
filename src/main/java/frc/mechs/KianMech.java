@@ -9,22 +9,16 @@ public class KianMech extends Mech {
 
     public Solenoid traySolenoid;
 
-    public Timer timer;
-
     public KianMech() {
-        traySolenoid = new Solenoid(Config.getInt("barneyPneumatic"));
+        traySolenoid = new Solenoid(Config.getInt("barney_pneumatic"));
 
     }
 
     @Override
     public void loop() throws InterruptedException {
-        if (timer.get() % 2.00 >= 1) {
-            traySolenoid.set(true);
-        } else {
-            traySolenoid.set(false);
-        }
-
-        System.out.println("Make CAD a subgroup");
-        System.out.println("DT better than controls");
+        traySolenoid.set(true);
+        Thread.sleep(1000);
+        traySolenoid.set(false);
+        Thread.sleep(1000);
     }
 }
