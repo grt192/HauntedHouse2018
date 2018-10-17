@@ -18,17 +18,19 @@ public class TurningHeadClosedLoop extends Mech {
 
         rotateMotor = new TalonSRX(Config.getInt("turning_head_motor"));
 
-        //rotateMotor.configClosedloopRamp(1, 0); // ramp up so to not change velocity too quikly
-        //Done with PID control
+        // rotateMotor.configClosedloopRamp(1, 0); // ramp up so to not change velocity
+        // too quikly
+        // Done with PID control
 
         rotateMotor.setNeutralMode(NeutralMode.Brake); // stop when power is dropped
 
         rotateMotor.config_kP(0, 3.0, 30); // https://sites.google.com/site/fpgaandco/pid
-        rotateMotor.config_kI(0, 0.8, 30;
+        rotateMotor.config_kI(0, 0.8, 30);
         rotateMotor.config_kD(0, 0.9, 30);
 
-        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30); // not sure what type of encoder, if any
-                                                                               // FeedbackDevice.Analog
+        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30); // not sure what type of encoder,
+                                                                                     // if any
+        // FeedbackDevice.Analog
 
         findZero();
 
