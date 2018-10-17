@@ -17,8 +17,8 @@ public class KianMech extends Mech {
     @Override
     public void loop() throws InterruptedException {
         traySolenoid.set(true);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         traySolenoid.set(false);
-        Thread.sleep(1000);
+        Thread.sleep(10000 + (int) (Math.random() * 15000));
     }
 }
