@@ -2,8 +2,6 @@ package frc.mechs;
 
 import frc.robot.Mech;
 
-import java.util.concurrent.TimeUnit;
-
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.config.Config;
 
