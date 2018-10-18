@@ -1,7 +1,7 @@
 package frc.mechs;
 
-import frc.robot.Mech;
 import frc.config.Config;
+import frc.robot.Mech;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -10,7 +10,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class TurningHeadClosedLoop extends Mech {
 
-    private final int encoderTicks = 4096; // I think - its based off encoder
+    private final float encoderTicks = 4096 / 100; // ticks per rotaion / motor to encoder ratio
+    private float facePos;
     private int encoderOffset;
     private TalonSRX rotateMotor;
 
@@ -28,9 +29,7 @@ public class TurningHeadClosedLoop extends Mech {
         rotateMotor.config_kI(0, 0.8, 30);
         rotateMotor.config_kD(0, 0.9, 30);
 
-        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30); // not sure what type of encoder,
-                                                                                     // if any
-        // FeedbackDevice.Analog
+        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
 
         findZero();
 
@@ -39,24 +38,27 @@ public class TurningHeadClosedLoop extends Mech {
     public void findZero() {
         encoderOffset = rotateMotor.getSelectedSensorPosition(0); // make the head face forward
 
-        int limit = encoderTicks / 4; // TODO: find value (how far the head can turn in each direction)
+        float limit = encoderTicks / 4; // TODO: find value (how far the head can turn in each direction)
 
-        rotateMotor.configForwardSoftLimitThreshold(limit - encoderOffset, 0);
-        rotateMotor.configReverseSoftLimitThreshold(-limit + encoderOffset, 0);
+        rotateMotor.configForwardSoftLimitThreshold(Math.round(limit - encoderOffset), 0);
+        rotateMotor.configReverseSoftLimitThreshold(Math.round(-limit + encoderOffset), 0);
         rotateMotor.configForwardSoftLimitEnable(true, 0);
         rotateMotor.configReverseSoftLimitEnable(true, 0);
     }
 
     private void moveHead(int targetPosition) {
-
         double encoderPos = targetPosition * encoderTicks + encoderOffset; // posion is mesured in encoder ticks
 
         rotateMotor.set(ControlMode.Position, encoderPos);
     }
 
     public void loop() throws InterruptedException {
+
         // - move to closest detected face (put on a timer, so its not snaping around to
         // different faces????)
+
+        // facePos = getFacePos();
+        // moveHead(facePos);
 
         // We can also intermitantly do some fancy animations with the head (make it
         // skake, do a 360, etc.)????

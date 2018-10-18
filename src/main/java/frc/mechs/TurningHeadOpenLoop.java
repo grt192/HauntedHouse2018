@@ -23,7 +23,7 @@ public class TurningHeadOpenLoop extends Mech {
     }
 
     private void moveHead(Double targetPosition) {
-        targetPosition -= 0.5; // make position bewteen -0.5 ad 0.5
+        targetPosition -= 0.5; // make position bewteen -0.5 and 0.5
         percentOutput = targetPosition / 2; // between -25% and 25%
 
         rotateMotor.set(ControlMode.PercentOutput, percentOutput);
