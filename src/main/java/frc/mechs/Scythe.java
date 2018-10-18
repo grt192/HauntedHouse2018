@@ -1,11 +1,22 @@
 package frc.mechs;
 
+import edu.wpi.first.wpilibj.Solenoid;
+import frc.config.Config;
 import frc.robot.Mech;
 
 public class Scythe extends Mech {
 
-    public void loop() throws InterruptedException {
-        // code here is repeated continuously while the haunted house is enabled
-        // there is no built-in delay
+    private Solenoid scytheMech;
+
+    public Scythe() {
+        scytheMech = new Solenoid(Config.getInt("scythePneumatics"));
     }
+
+    public void loop() throws InterruptedException {
+        scytheMech.set(true);
+        Thread.sleep(2000);
+        scytheMech.set(false);
+        Thread.sleep(2000);
+    }
+
 }
