@@ -2,6 +2,7 @@ package frc.mechs;
 
 import frc.config.Config;
 import frc.robot.Mech;
+import frc.robot.JeVois;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -10,14 +11,17 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class TurningHeadClosedLoop extends Mech {
 
-    private final float encoderTicks = 4096 * 100; // ticks per rotaion * motor to encoder ratio
-    private float facePos;
+    private final int encoderTicks = 4096 * 100; // ticks per rotaion * motor to encoder ratio
+    private double facePos;
+    private JeVois camera;
     private int encoderOffset;
     private TalonSRX rotateMotor;
 
     public TurningHeadClosedLoop() {
 
         rotateMotor = new TalonSRX(Config.getInt("turning_head_motor"));
+        camera = new JeVois();
+        camera.start();
 
         // rotateMotor.configClosedloopRamp(1, 0); // ramp up so to not change velocity
         // too quikly
@@ -46,7 +50,7 @@ public class TurningHeadClosedLoop extends Mech {
         rotateMotor.configReverseSoftLimitEnable(true, 0);
     }
 
-    private void moveHead(int targetPosition) {
+    private void moveHead(double targetPosition) {
         double encoderPos = targetPosition * encoderTicks + encoderOffset; // posion is mesured in encoder ticks
 
         rotateMotor.set(ControlMode.Position, encoderPos);
@@ -54,13 +58,8 @@ public class TurningHeadClosedLoop extends Mech {
 
     public void loop() throws InterruptedException {
 
-        // - move to closest detected face (put on a timer, so its not snaping around to
-        // different faces????)
+        facePos = camera.getLastDouble();
+        moveHead(facePos);
 
-        // facePos = getFacePos();
-        // moveHead(facePos);
-
-        // We can also intermitantly do some fancy animations with the head (make it
-        // skake, do a 360, etc.)????
     }
 }
