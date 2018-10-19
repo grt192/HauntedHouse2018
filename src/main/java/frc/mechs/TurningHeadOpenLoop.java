@@ -2,6 +2,7 @@ package frc.mechs;
 
 import frc.robot.Mech;
 import frc.config.Config;
+import frc.robot.JeVois;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -10,11 +11,15 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class TurningHeadOpenLoop extends Mech {
 
     private TalonSRX rotateMotor;
+    private double facePos;
+    private JeVois camera;
     Double percentOutput;
 
     public TurningHeadOpenLoop() {
 
         rotateMotor = new TalonSRX(Config.getInt("turning_head_motor"));
+        camera = new JeVois();
+        camera.start();
 
         // rotateMotor.configOpenloopRamp(1, 0); // ramp up so to not change velocity
         // too quikly
@@ -30,10 +35,7 @@ public class TurningHeadOpenLoop extends Mech {
     }
 
     public void loop() throws InterruptedException {
-        // - move to closest detected face (put on a timer, so its not snaping around to
-        // different faces????)
-
-        // We can also intermitantly do some fancy animations with the head (make it
-        // skake, do a 360, etc.)????
+        facePos = camera.getLastDouble();
+        moveHead(facePos);
     }
 }
