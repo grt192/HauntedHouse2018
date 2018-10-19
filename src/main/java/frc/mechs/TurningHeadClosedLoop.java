@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class TurningHeadClosedLoop extends Mech {
 
-    private final float encoderTicks = 4096 / 100; // ticks per rotaion / motor to encoder ratio
+    private final float encoderTicks = 4096 * 100; // ticks per rotaion * motor to encoder ratio
     private float facePos;
     private int encoderOffset;
     private TalonSRX rotateMotor;
@@ -29,7 +29,7 @@ public class TurningHeadClosedLoop extends Mech {
         rotateMotor.config_kI(0, 0.8, 30);
         rotateMotor.config_kD(0, 0.9, 30);
 
-        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30); // https://www.vexrobotics.com/217-5046.html
 
         findZero();
 
