@@ -10,15 +10,19 @@ package frc.robot;
 import java.util.HashSet;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.config.Config;
 
 public class Robot extends IterativeRobot {
 
     private HashSet<Mech> mechs;
+    private JeVois jevois;
 
     @Override
     public void robotInit() {
         Config.start();
+        jevois = new JeVois(Port.kUSB1);
+        jevois.start();
         mechs = new HashSet<>();
     }
 
