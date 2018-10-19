@@ -16,10 +16,10 @@ public class HaveANiceDay extends Mech {
         // code here is repeated continuously while the haunted house is enabled
         // there is no built-in delay
 
-        Thread.sleep((long) (5000 + 10000 * Math.random()));
+        Thread.sleep((long) (3000 + 1000 * Math.random()));
         mechSolenoid.set(false);
 
-        Thread.sleep((long) (5000 + 10000 * Math.random()));
+        Thread.sleep((long) (3000 + 1000 * Math.random()));
         mechSolenoid.set(true);
     }
 }
