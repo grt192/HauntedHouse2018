@@ -1,4 +1,4 @@
 # Config file for haunted house 2018
 
 example_mech_motor=0
-RotisserieDora=0
+rotisserie_dora=0
