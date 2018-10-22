@@ -12,6 +12,7 @@ import java.util.HashSet;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.config.Config;
+import frc.mechs.TurningHeadOpenLoop;
 
 public class Robot extends IterativeRobot {
 
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
         jevois = new JeVois(Port.kUSB1);
         jevois.start();
         mechs = new HashSet<>();
+        mechs.add(new TurningHeadOpenLoop()); // No encoder | For encoder use TurningHeadClosedLoop
     }
 
     @Override
