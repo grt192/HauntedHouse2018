@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
         jevois = new JeVois(Port.kUSB1);
         jevois.start();
         mechs = new HashSet<>();
-        mechs.add(new TurningHeadOpenLoop()); // No encoder | For encoder use TurningHeadClosedLoop
+        mechs.add(new TurningHeadOpenLoop(jevois)); // No encoder | For encoder use TurningHeadClosedLoop
     }
 
     @Override

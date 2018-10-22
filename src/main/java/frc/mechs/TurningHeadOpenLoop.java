@@ -15,10 +15,10 @@ public class TurningHeadOpenLoop extends Mech {
     private JeVois camera;
     Double percentOutput;
 
-    public TurningHeadOpenLoop() {
+    public TurningHeadOpenLoop(JeVois faceCam) {
 
         rotateMotor = new TalonSRX(Config.getInt("turning_head_motor"));
-        camera = new JeVois();
+        camera = faceCam;
         camera.start();
 
         // rotateMotor.configOpenloopRamp(1, 0); // ramp up so to not change velocity
