@@ -9,7 +9,7 @@ public class Scythe extends Mech {
     private Solenoid scytheMech;
 
     public Scythe() {
-        scytheMech = new Solenoid(Config.getInt("scythePneumatics"));
+        scytheMech = new Solenoid(Config.getInt("scythe_pneumatics"));
     }
 
     public void loop() throws InterruptedException {
