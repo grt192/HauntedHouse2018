@@ -37,6 +37,6 @@ public class StairHand extends Mech {
                 
         // 6. Restart in a random amount of 
         // time btwn 20 and 40 seconds
-        Thread.sleep(Math.random * 2000 + 2000);
+        Thread.sleep(Math.random * 20000 + 20000);
     }
 }
