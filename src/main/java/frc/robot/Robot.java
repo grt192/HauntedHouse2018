@@ -20,6 +20,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         Config.start();
         mechs = new HashSet<>();
+        mechs.add(new StairHand());
     }
 
     @Override
