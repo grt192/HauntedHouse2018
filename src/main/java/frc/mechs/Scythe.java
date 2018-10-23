@@ -14,9 +14,9 @@ public class Scythe extends Mech {
 
     public void loop() throws InterruptedException {
         scytheMech.set(true);
-        Thread.sleep((long) (1000 + 3000 * Math.random()));
+        Thread.sleep((long) (2000 + 3000 * Math.random()));
         scytheMech.set(false);
-        Thread.sleep((long) (1000 + 3000 * Math.random()));
+        Thread.sleep((long) (4000 + 3000 * Math.random()));
     }
 
 }
