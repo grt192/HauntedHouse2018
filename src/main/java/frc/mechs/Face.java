@@ -13,13 +13,18 @@ public class Face extends Mech {
     private Face() {
         Config.start();
         mechSolenoid = new Solenoid(Config.getInt("face"));
+        // read delay from the config
         handDelay = Config.getInt("face.delay");
     }
 
     public void loop() throws InterruptedException {
+        // starting hand
         mechSolenoid.set(true);
+        // wait for delay time
         Thread.sleep(handDelay);
+        // hand goes back
         mechSolenoid.set(false);
+        // wait for delay time
         Thread.sleep(handDelay);
 
         // code here is repeated continuously while the haunted house is enabled
