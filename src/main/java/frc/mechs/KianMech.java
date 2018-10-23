@@ -1,7 +1,6 @@
 package frc.mechs;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
 import frc.config.Config;
 import frc.robot.Mech;
 
