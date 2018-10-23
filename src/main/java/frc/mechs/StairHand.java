@@ -16,7 +16,7 @@ public class StairHand extends Mech {
     public StairHand () {
         Random rand = new Random();
         int hi = 20;
-        int lo = 40;
+        int lo = 30;
         int rand_time = rand.nextInt(hi-lo) + lo;
         stair = new Solenoid(Config.getInt(stair));
         hand = new Solenoid(Config.getInt(hand));
