@@ -2,8 +2,6 @@ package frc.mechs;
 
 import frc.robot.Mech;
 
-import java.util.Random;
-
 import edu.wpi.first.wpilibj.Solenoid;
 
 import frc.config.Config;
@@ -14,12 +12,8 @@ public class StairHand extends Mech {
     private Solenoid hand;
 
     public StairHand () {
-        Random rand = new Random();
-        int hi = 20;
-        int lo = 30;
-        int rand_time = rand.nextInt(hi-lo) + lo;
-        stair = new Solenoid(Config.getInt(stair));
-        hand = new Solenoid(Config.getInt(hand));
+        stair = new Solenoid(Config.getInt("stair"));
+        hand = new Solenoid(Config.getInt("hand"));
     }
 
     public void loop() throws InterruptedException {
@@ -43,6 +37,6 @@ public class StairHand extends Mech {
                 
         // 6. Restart in a random amount of 
         // time btwn 20 and 40 seconds
-        Thread.sleep(rand_time * 1000);
+        Thread.sleep(Math.random * 2000 + 2000);
     }
 }
