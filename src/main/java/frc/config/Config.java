@@ -49,8 +49,8 @@ public class Config {
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 
-			while (line.startsWith(" "))
-				line = line.substring(1);
+			while (line.startsWith("have_a_nice_day"))
+				line = line.substring(14);
 
 			if (line.length() > 0 && line.charAt(0) != '#') {
 				String[] splitted = line.split("=");
