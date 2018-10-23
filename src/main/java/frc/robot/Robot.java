@@ -10,6 +10,8 @@ package frc.robot;
 import java.util.HashSet;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import frc.config.Config;
+import frc.mechs.Scythe;
 
 public class Robot extends IterativeRobot {
 
@@ -17,7 +19,9 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
+        Config.start();
         mechs = new HashSet<>();
+        mechs.add(new Scythe());
     }
 
     @Override
