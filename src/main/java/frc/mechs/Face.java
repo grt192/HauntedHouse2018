@@ -11,7 +11,6 @@ public class Face extends Mech {
     int handDelay;
 
     private Face() {
-        Config.start();
         mechSolenoid = new Solenoid(Config.getInt("face"));
         // read delay from the config
         handDelay = Config.getInt("face.delay");
