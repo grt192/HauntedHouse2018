@@ -25,13 +25,12 @@ public class TurningHeadOpenLoop extends Mech {
 
         rotateMotor = new TalonSRX(Config.getInt("turning_head_motor"));
         camera = faceCam;
-        camera.start();
 
         // rotateMotor.configOpenloopRamp(1, 0); // ramp up so to not change velocity
         // too quikly
 
         rotateMotor.setNeutralMode(NeutralMode.Brake); // stop when power is dropped
-        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30); // https://www.vexrobotics.com/217-5046.html
+        rotateMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0); // https://www.vexrobotics.com/217-5046.html
 
         findZero();
     }
