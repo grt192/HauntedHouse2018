@@ -11,6 +11,7 @@ import java.util.HashSet;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
+import frc.mechs.StairHand;
 
 public class Robot extends IterativeRobot {
 
