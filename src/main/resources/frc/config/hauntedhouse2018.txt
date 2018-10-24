@@ -1,4 +1,3 @@
 # Config file for haunted house 2018
 
 face = 0
-face.delay = 3000

@@ -1,8 +1,7 @@
 package frc.mechs;
 
-import frc.robot.Mech;
-import frc.config.*;
 import edu.wpi.first.wpilibj.Solenoid;
+import frc.config.Config;
 import frc.robot.Mech;
 
 public class Face extends Mech {
@@ -13,7 +12,7 @@ public class Face extends Mech {
     public Face() {
         mechSolenoid = new Solenoid(Config.getInt("face"));
         // read delay from the config
-        handDelay = Config.getInt("face.delay");
+        handDelay = 3000;
     }
 
     public void loop() throws InterruptedException {
