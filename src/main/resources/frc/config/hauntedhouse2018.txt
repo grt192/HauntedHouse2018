@@ -1,4 +1,22 @@
 # Config file for haunted house 2018
 
 example_mech_motor=0
+
 rotisserie_dora=0
+rotisserie_dora_talon=0
+
+face = 0
+
+have_a_nice_day=0
+
+stair = 0
+hand = 0
+
+barney_pneumatic=0
+
+scythe_pneumatics = 0
+
+eye_pneumatic_forward=1
+eye_pneumatic_down=2
+
+turning_head_motor=0

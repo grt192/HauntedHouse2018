@@ -1,20 +1,20 @@
 package frc.mechs;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.config.*;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.Solenoid;
+import frc.config.Config;
 import frc.robot.Mech;
 
 public class RotisserieDora extends Mech {
 
-    Solenoid mechSolenoid;
-    TalonSRX mechTalon;
+    private Solenoid mechSolenoid;
+    private TalonSRX mechTalon;
 
     public RotisserieDora() {
-        Config.start();
         mechSolenoid = new Solenoid(Config.getInt("rotisserie_dora"));
-        mechTalon = new TalonSRX(Config.getInt("rotisserie_dora"));
+        mechTalon = new TalonSRX(Config.getInt("rotisserie_dora_talon"));
         Config.defaultConfigTalon(mechTalon);
     }
 
