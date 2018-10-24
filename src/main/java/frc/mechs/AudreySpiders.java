@@ -11,6 +11,7 @@ import frc.robot.Mech;
 
 public class AudreySpiders extends Mech {
 
+    // TalonSRX and limit switch created
     private TalonSRX motor1;
     private DigitalInput limitSwitch;
 
@@ -20,6 +21,7 @@ public class AudreySpiders extends Mech {
     private long timeDown;
     private long currentTime = System.currentTimeMillis();
 
+    // Constructor
     public AudreySpiders() {
 
         // Set up TalonSRX
@@ -32,6 +34,7 @@ public class AudreySpiders extends Mech {
 
     }
 
+    // Methods to move motor clockwise(spiderDown) and counter-clockwise(spiderUp)
     public void spiderDown() {
 
         motor1.set(ControlMode.PercentOutput, outputPercent);
