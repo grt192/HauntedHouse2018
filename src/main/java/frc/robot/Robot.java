@@ -10,6 +10,7 @@ package frc.robot;
 import java.util.HashSet;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import frc.mechs.AudreySpiders;
 
 public class Robot extends IterativeRobot {
 
@@ -18,6 +19,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         mechs = new HashSet<>();
+        mechs.add(new AudreySpiders());
     }
 
     @Override

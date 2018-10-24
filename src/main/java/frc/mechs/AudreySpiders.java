@@ -16,10 +16,13 @@ public class AudreySpiders extends Mech {
     private DigitalInput limitSwitch;
 
     // Need to test mech to figure out variables
-    private int outputPercent;
+    private double outputPercent = 0.25;
     private long timeUp;
     private long timeDown;
     private long currentTime = System.currentTimeMillis();
+
+    private boolean prevSwitchValue;
+    private double currentOutput;
 
     // Constructor
     public AudreySpiders() {
@@ -31,7 +34,8 @@ public class AudreySpiders extends Mech {
 
         // Set up limit switch
         limitSwitch = new DigitalInput(9);
-
+        currentOutput = outputPercent;
+        prevSwitchValue = false;
     }
 
     // Methods to move motor clockwise(spiderDown) and counter-clockwise(spiderUp)
@@ -48,30 +52,13 @@ public class AudreySpiders extends Mech {
     }
 
     public void loop() throws InterruptedException {
-        // code here is repeated continuously while the haunted house is enabled
-        // there is no built-in delay
-
-        // Can use timeUp, timeDown, currentTime, and wait() to movie spider
-        // Will make more complex once figuring out variables
-
-        // while(System.currentTimeMillis() < timeDown){
-        // spiderDown();
-        // Thread.sleep(2000);
-        // }
-        // while(System.currentTimeMillis() < timeUp){
-        // spiderUp();
-        // Thread.sleep(2000);
-        // }
-
-        // Can also use limit switches to determine when to do spiderUp and spiderDown
-
-        if (limitSwitch.get() == true) {
-            spiderDown();
-            Thread.sleep((long) Math.random() * 300);
-        } else {
-            spiderUp();
-            Thread.sleep((long) Math.random() * 300);
+        motor1.set(ControlMode.PercentOutput, currentOutput);
+        boolean switchValue = limitSwitch.get();
+        if (switchValue && !prevSwitchValue) {
+            currentOutput *= -1;
         }
+        prevSwitchValue = switchValue;
+        Thread.sleep(50);
 
     }
 }
