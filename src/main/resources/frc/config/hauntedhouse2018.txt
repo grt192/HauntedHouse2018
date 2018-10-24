@@ -2,6 +2,7 @@
 
 example_mech_motor=0
 
+audrey_spiders=0
 rotisserie_dora=0
 rotisserie_dora_talon=0
 
