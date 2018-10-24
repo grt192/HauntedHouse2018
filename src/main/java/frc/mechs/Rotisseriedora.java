@@ -22,14 +22,12 @@ public class RotisserieDora extends Mech {
 
         mechSolenoid.set(true);
         Thread.sleep(4000);
-        mechSolenoid.set(false);
         mechTalon.set(ControlMode.PercentOutput, 0.25);
         Thread.sleep(3000);
         mechTalon.set(ControlMode.PercentOutput, 0.0);
-        mechSolenoid.set(true);
         Thread.sleep(4000);
         mechSolenoid.set(false);
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         // code here is repeated continuously while the haunted house is enabled
         // there is no built-in delay
     }
