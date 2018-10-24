@@ -12,8 +12,14 @@ import java.util.HashSet;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.config.Config;
+import frc.mechs.AudreySpiders;
 import frc.mechs.Eye;
+import frc.mechs.Face;
+import frc.mechs.HaveANiceDay;
+import frc.mechs.KianMech;
+import frc.mechs.RotisserieDora;
 import frc.mechs.Scythe;
+import frc.mechs.StairHand;
 import frc.mechs.TurningHeadOpenLoop;
 
 public class Robot extends IterativeRobot {
@@ -27,6 +33,12 @@ public class Robot extends IterativeRobot {
         jevois = new JeVois(Port.kUSB);
         jevois.start();
         mechs = new HashSet<>();
+        mechs.add(new AudreySpiders());
+        mechs.add(new RotisserieDora());
+        mechs.add(new Face());
+        mechs.add(new HaveANiceDay());
+        mechs.add(new StairHand());
+        mechs.add(new KianMech());
         mechs.add(new TurningHeadOpenLoop(jevois)); // No encoder | For encoder use TurningHeadClosedLoop
         mechs.add(new Eye());
         mechs.add(new Scythe());
