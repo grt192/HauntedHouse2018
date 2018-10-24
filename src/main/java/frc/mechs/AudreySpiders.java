@@ -56,19 +56,21 @@ public class AudreySpiders extends Mech {
 
         // while(System.currentTimeMillis() < timeDown){
         // spiderDown();
-        // wait(2000);
+        // Thread.sleep(2000);
         // }
         // while(System.currentTimeMillis() < timeUp){
         // spiderUp();
-        // wait(2000);
+        // Thread.sleep(2000);
         // }
 
         // Can also use limit switches to determine when to do spiderUp and spiderDown
 
         if (limitSwitch.get() == true) {
             spiderDown();
+            Thread.sleep((long) Math.random() * 300);
         } else {
             spiderUp();
+            Thread.sleep((long) Math.random() * 300);
         }
 
     }
