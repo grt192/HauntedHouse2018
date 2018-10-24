@@ -6,11 +6,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Mech;
 
 public class AudreySpiders extends Mech {
 
     private TalonSRX motor1;
+    private DigitalInput limitSwitch;
 
     // Need to test mech to figure out variables
     private int outputPercent;
@@ -20,22 +22,25 @@ public class AudreySpiders extends Mech {
 
     public AudreySpiders() {
 
-        motor1 = new TalonSRX(Config.getInt("AudreySpiders"));
+        // Set up TalonSRX
+        motor1 = new TalonSRX(Config.getInt("audrey_spiders"));
         motor1.setNeutralMode(NeutralMode.Brake);
+        motor1.setInverted(false);
+
+        // Set up limit switch
+        limitSwitch = new DigitalInput(9);
 
     }
 
     public void spiderDown() {
 
-        motor1.setInverted(false);
         motor1.set(ControlMode.PercentOutput, outputPercent);
 
     }
 
     public void spiderUp() {
 
-        motor1.setInverted(true);
-        motor1.set(ControlMode.PercentOutput, outputPercent);
+        motor1.set(ControlMode.PercentOutput, -outputPercent);
 
     }
 
@@ -54,6 +59,14 @@ public class AudreySpiders extends Mech {
         // spiderUp();
         // wait(2000);
         // }
+
+        // Can also use limit switches to determine when to do spiderUp and spiderDown
+
+        if (limitSwitch.get() == true) {
+            spiderDown();
+        } else {
+            spiderUp();
+        }
 
     }
 }
