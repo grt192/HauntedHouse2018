@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
         Config.start();
         mechs = new HashSet<>();
         mechs.add(new AudreySpiders());
-        // mechs.add(new RotisserieDora());
+        // mechs.add(new RotisserieDora()); :'(
         // mechs.add(new Face()); Is connected to scythe
         mechs.add(new HaveANiceDay());
         mechs.add(new StairHand());
@@ -42,10 +42,9 @@ public class Robot extends IterativeRobot {
             mechs.add(new TurningHeadOpenLoop(jevois));
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Using sad head :(");
             mechs.add(new SadTurningHead());
         }
-        // mechs.add(new TurningHeadOpenLoop(jevois)); // No encoder | For encoder use
-        // TurningHeadClosedLoop
         mechs.add(new Eye());
         mechs.add(new Scythe());
     }

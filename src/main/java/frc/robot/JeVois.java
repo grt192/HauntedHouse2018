@@ -25,13 +25,15 @@ public class JeVois extends Thread {
                 try {
                     this.lastString = camera.readString().trim();
                     System.out.println(lastString);
-                    if (!(lastString.equals("") || lastString.equals("None"))) {
-                        try {
-                            lastDouble = Double.valueOf(lastString);
-                        } catch (NumberFormatException exception) {
+                    if (!lastString.equals("")) {
+                        if (lastString.equals("None")) {
+                            lastDouble = 0.5;
+                        } else {
+                            try {
+                                lastDouble = Double.valueOf(lastString);
+                            } catch (NumberFormatException exception) {
+                            }
                         }
-                    } else {
-                        lastDouble = 0.5D;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

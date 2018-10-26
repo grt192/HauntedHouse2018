@@ -12,13 +12,13 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class TurningHeadOpenLoop extends Mech {
 
     private final int encoderTicks = 4096 * 100; // ticks per rotaion * motor to encoder ratio
-    private int encoderOffset;
 
     private TalonSRX rotateMotor;
 
     private double facePos;
     private JeVois camera;
 
+    private double scale = 0.25;
     Double percentOutput;
 
     public TurningHeadOpenLoop(JeVois faceCam) {
@@ -36,19 +36,17 @@ public class TurningHeadOpenLoop extends Mech {
     }
 
     private void findZero() {
-        encoderOffset = rotateMotor.getSelectedSensorPosition(0); // make the head face forward
+        int limit = encoderTicks / 4; // TODO: find value (how far the head can turn in each direction)
 
-        float limit = encoderTicks / 4; // TODO: find value (how far the head can turn in each direction)
-
-        rotateMotor.configForwardSoftLimitThreshold(Math.round(limit - encoderOffset), 0);
-        rotateMotor.configReverseSoftLimitThreshold(Math.round(-limit + encoderOffset), 0);
+        rotateMotor.configForwardSoftLimitThreshold(limit, 0);
+        rotateMotor.configReverseSoftLimitThreshold(-limit, 0);
         rotateMotor.configForwardSoftLimitEnable(true, 0);
         rotateMotor.configReverseSoftLimitEnable(true, 0);
     }
 
     private void moveHead(Double targetPosition) {
         targetPosition -= 0.5; // make position bewteen -0.5 and 0.5
-        percentOutput = targetPosition / 2; // between -25% and 25%
+        percentOutput = targetPosition * scale; // between -25% and 25%
 
         rotateMotor.set(ControlMode.PercentOutput, percentOutput);
     }
@@ -56,5 +54,6 @@ public class TurningHeadOpenLoop extends Mech {
     public void loop() throws InterruptedException {
         facePos = camera.getLastDouble();
         moveHead(facePos);
+        Thread.sleep(50);
     }
 }
