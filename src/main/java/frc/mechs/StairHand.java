@@ -23,10 +23,7 @@ public class StairHand extends Mech {
 
         // 2. Hand extends (2 sec)
         hand.set(true);
-        Thread.sleep(2000);
-
-        // 3. Pause (3 sec)
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
         // 4. Hand retracts (2 sec)
         hand.set(false);

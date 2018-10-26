@@ -18,6 +18,6 @@ public class KianMech extends Mech {
         traySolenoid.set(true);
         Thread.sleep(5000);
         traySolenoid.set(false);
-        Thread.sleep(10000 + (int) (Math.random() * 15000));
+        Thread.sleep(5000 + (int) (Math.random() * 10000));
     }
 }

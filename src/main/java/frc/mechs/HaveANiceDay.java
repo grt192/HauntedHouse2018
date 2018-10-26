@@ -19,7 +19,7 @@ public class HaveANiceDay extends Mech {
         Thread.sleep((long) (3000 + 2000 * Math.random()));
         mechSolenoid.set(false);
 
-        Thread.sleep((long) (10000 + 5000 * Math.random()));
+        Thread.sleep((long) (5000 + 5000 * Math.random()));
         mechSolenoid.set(true);
     }
 }

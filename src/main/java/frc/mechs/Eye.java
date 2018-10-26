@@ -18,8 +18,8 @@ public class Eye extends Mech {
         // code here is repeated continuously while the haunted house is enabled
         // there is no built-in delay
         eye1.set(true);
-        Thread.sleep(500);
-        int j = (int) Math.round((Math.random() * 4) + 1);
+        Thread.sleep(1000);
+        double j = Math.random() * 5;
         for (int i = 0; i < j; i++) {
             eye2.set(true);
             Thread.sleep((long) ((Math.random() * 0.5 + 0.5) * 1000));

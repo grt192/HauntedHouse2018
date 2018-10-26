@@ -21,13 +21,13 @@ public class RotisserieDora extends Mech {
     public void loop() throws InterruptedException {
 
         mechSolenoid.set(true);
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         mechTalon.set(ControlMode.PercentOutput, 0.25);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         mechTalon.set(ControlMode.PercentOutput, 0.0);
-        Thread.sleep(4000);
+        Thread.sleep(1000);
         mechSolenoid.set(false);
-        Thread.sleep(6000);
+        Thread.sleep((long) (5000 + Math.random() * 5000));
         // code here is repeated continuously while the haunted house is enabled
         // there is no built-in delay
     }

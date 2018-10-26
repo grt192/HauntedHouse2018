@@ -16,7 +16,7 @@ public class Scythe extends Mech {
         scytheMech.set(true);
         Thread.sleep((long) (2000 + 3000 * Math.random()));
         scytheMech.set(false);
-        Thread.sleep((long) (4000 + 3000 * Math.random()));
+        Thread.sleep((long) (3000 + 3000 * Math.random()));
     }
 
 }
