@@ -18,7 +18,7 @@ public class TurningHeadOpenLoop extends Mech {
     private double facePos;
     private JeVois camera;
 
-    private double scale = 0.25;
+    private double scale = 0.5;
     Double percentOutput;
 
     public TurningHeadOpenLoop(JeVois faceCam) {
@@ -46,7 +46,7 @@ public class TurningHeadOpenLoop extends Mech {
 
     private void moveHead(Double targetPosition) {
         targetPosition -= 0.5; // make position bewteen -0.5 and 0.5
-        percentOutput = targetPosition * scale; // between -25% and 25%
+        percentOutput = targetPosition * scale;
 
         rotateMotor.set(ControlMode.PercentOutput, percentOutput);
     }
