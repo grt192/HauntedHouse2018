@@ -26,6 +26,7 @@ public abstract class Mech implements Runnable {
     public abstract void loop() throws InterruptedException;
 
     public final void stop() {
-        thread.interrupt();
+        if (thread != null)
+            thread.interrupt();
     }
 }

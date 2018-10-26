@@ -30,10 +30,13 @@ public class JeVois extends Thread {
                             lastDouble = Double.valueOf(lastString);
                         } catch (NumberFormatException exception) {
                         }
+                    } else {
+                        lastDouble = 0.5D;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                System.out.println(this.lastDouble);
             }
         }
     }

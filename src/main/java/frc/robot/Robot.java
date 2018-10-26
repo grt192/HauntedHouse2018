@@ -34,12 +34,13 @@ public class Robot extends IterativeRobot {
         jevois.start();
         mechs = new HashSet<>();
         mechs.add(new AudreySpiders());
-        mechs.add(new RotisserieDora());
-        mechs.add(new Face());
+        // mechs.add(new RotisserieDora());
+        // mechs.add(new Face()); Is connected to scythe
         mechs.add(new HaveANiceDay());
         mechs.add(new StairHand());
         mechs.add(new KianMech());
-        mechs.add(new TurningHeadOpenLoop(jevois)); // No encoder | For encoder use TurningHeadClosedLoop
+        // mechs.add(new TurningHeadOpenLoop(jevois)); // No encoder | For encoder use
+        // TurningHeadClosedLoop
         mechs.add(new Eye());
         mechs.add(new Scythe());
     }
@@ -50,6 +51,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        jevois.enable();
         for (Mech mech : mechs)
             mech.start();
     }

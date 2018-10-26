@@ -28,6 +28,6 @@ public class Eye extends Mech {
         }
         Thread.sleep(2500);
         eye1.set(false);
-        Thread.sleep((long) (Math.random() * 20000 + 20000));
+        Thread.sleep((long) (Math.random() * 5000 + 5000));
     }
 }

@@ -16,7 +16,7 @@ public class AudreySpiders extends Mech {
     private DigitalInput limitSwitch;
 
     // Need to test mech to figure out variables
-    private double outputPercent = 0.25;
+    private double outputPercent = 0.2;
     private long timeUp;
     private long timeDown;
     private long currentTime = System.currentTimeMillis();
@@ -53,7 +53,7 @@ public class AudreySpiders extends Mech {
 
     public void loop() throws InterruptedException {
         motor1.set(ControlMode.PercentOutput, currentOutput);
-        boolean switchValue = limitSwitch.get();
+        boolean switchValue = !limitSwitch.get();
         if (switchValue && !prevSwitchValue) {
             currentOutput *= -1;
         }
