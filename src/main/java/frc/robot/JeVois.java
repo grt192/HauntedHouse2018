@@ -24,7 +24,7 @@ public class JeVois extends Thread {
             if (this.enabled) {
                 try {
                     this.lastString = camera.readString().trim();
-                    // System.out.println(lastString + " .");
+                    System.out.println(lastString);
                     if (!(lastString.equals("") || lastString.equals("None"))) {
                         try {
                             lastDouble = Double.valueOf(lastString);
@@ -37,6 +37,11 @@ public class JeVois extends Thread {
                     e.printStackTrace();
                 }
                 System.out.println(this.lastDouble);
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

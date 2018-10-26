@@ -10,9 +10,9 @@ import frc.robot.Mech;
 public class SadTurningHead extends Mech {
 
     private static final double TICK_LIMIT = 44000.0;
-    private static final double MAX_SPEED = 0.5;
-    private static final double MIN_SPEED = 0.1;
+    private static final double SPEED = 0.1;
 
+    private double destination;
     private double direction;
     private TalonSRX motor;
 
@@ -25,18 +25,20 @@ public class SadTurningHead extends Mech {
 
     @Override
     public void loop() throws InterruptedException {
-        double pos = motor.getSelectedSensorPosition(0) / TICK_LIMIT;
-
-        if (direction * pos > 1.0) {
-            direction *= -1;
+        int pos = motor.getSelectedSensorPosition(0);
+        if (Math.signum(pos - destination) == Math.signum(direction)) {
+            motor.set(ControlMode.PercentOutput, 0);
+            Thread.sleep((long) ((Math.random() * 2000) + 1000));
+            findNewDestination();
         }
-
-        double speed = MAX_SPEED - (MAX_SPEED - MIN_SPEED) * Math.abs(pos);
-        speed = Math.max(MIN_SPEED, speed); // just in case
-
-        motor.set(ControlMode.PercentOutput, speed * direction);
+        motor.set(ControlMode.PercentOutput, SPEED * direction);
 
         Thread.sleep(50);
+    }
+
+    private void findNewDestination() {
+        destination = Math.random() * 2 * TICK_LIMIT - TICK_LIMIT;
+        direction = Math.signum(destination - motor.getSelectedSensorPosition(0));
     }
 
 }

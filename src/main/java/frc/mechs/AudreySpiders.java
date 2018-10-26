@@ -16,10 +16,7 @@ public class AudreySpiders extends Mech {
     private DigitalInput limitSwitch;
 
     // Need to test mech to figure out variables
-    private double outputPercent = 0.2;
-    private long timeUp;
-    private long timeDown;
-    private long currentTime = System.currentTimeMillis();
+    private double outputPercent = 0.175;
 
     private boolean prevSwitchValue;
     private double currentOutput;

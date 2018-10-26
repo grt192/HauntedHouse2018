@@ -19,6 +19,7 @@ import frc.mechs.KianMech;
 import frc.mechs.SadTurningHead;
 import frc.mechs.Scythe;
 import frc.mechs.StairHand;
+import frc.mechs.TurningHeadOpenLoop;
 
 public class Robot extends IterativeRobot {
 
@@ -28,8 +29,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         Config.start();
-        jevois = new JeVois(Port.kUSB);
-        jevois.start();
         mechs = new HashSet<>();
         mechs.add(new AudreySpiders());
         // mechs.add(new RotisserieDora());
@@ -37,8 +36,15 @@ public class Robot extends IterativeRobot {
         mechs.add(new HaveANiceDay());
         mechs.add(new StairHand());
         mechs.add(new KianMech());
+        try {
+            jevois = new JeVois(Port.kUSB1);
+            jevois.start();
+            mechs.add(new TurningHeadOpenLoop(jevois));
+        } catch (Exception e) {
+            e.printStackTrace();
+            mechs.add(new SadTurningHead());
+        }
         // mechs.add(new TurningHeadOpenLoop(jevois)); // No encoder | For encoder use
-        mechs.add(new SadTurningHead());
         // TurningHeadClosedLoop
         mechs.add(new Eye());
         mechs.add(new Scythe());
@@ -50,7 +56,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        jevois.enable();
+        if (jevois != null)
+            jevois.enable();
         for (Mech mech : mechs)
             mech.start();
     }
@@ -59,5 +66,7 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
         for (Mech mech : mechs)
             mech.stop();
+        if (jevois != null)
+            jevois.disable();
     }
 }
