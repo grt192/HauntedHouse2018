@@ -30,13 +30,13 @@ public class StairHand extends Mech {
 
         // 4. Hand retracts (2 sec)
         hand.set(false);
-        Thread.sleep(1000);
+        Thread.sleep(3000);
 
         // 5. Stair closes (1 sec)
         stair.set(false);
 
         // 6. Restart in a random amount of
         // time btwn 20 and 40 seconds
-        Thread.sleep((long) (Math.random() * 20000 + 20000));
+        Thread.sleep((long) (Math.random() * 5000 + 5000));
     }
 }

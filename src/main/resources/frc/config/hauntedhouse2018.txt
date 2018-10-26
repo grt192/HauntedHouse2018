@@ -11,8 +11,8 @@ face=0
 
 have_a_nice_day=7
 
-stair=1
-hand=2
+stair=2
+hand=1
 
 barney_pneumatic=6
 
