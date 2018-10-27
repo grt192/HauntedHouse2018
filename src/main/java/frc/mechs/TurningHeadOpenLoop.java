@@ -11,15 +11,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class TurningHeadOpenLoop extends Mech {
 
-    private final int encoderTicks = 4096 * 100; // ticks per rotaion * motor to encoder ratio
+    private static final int encoderTicks = 4096 * 100; // ticks per rotaion * motor to encoder ratio
+    private static final double SCALE = 0.5;
+    private static final double MIN_AGE = 100.0;
+    private static final double MAX_AGE = 500.0;
 
     private TalonSRX rotateMotor;
 
-    private double facePos;
     private JeVois camera;
-
-    private double scale = 0.5;
-    Double percentOutput;
 
     public TurningHeadOpenLoop(JeVois faceCam) {
 
@@ -44,16 +43,19 @@ public class TurningHeadOpenLoop extends Mech {
         rotateMotor.configReverseSoftLimitEnable(true, 0);
     }
 
-    private void moveHead(Double targetPosition) {
-        targetPosition -= 0.5; // make position bewteen -0.5 and 0.5
-        percentOutput = targetPosition * scale;
+    public void loop() throws InterruptedException {
+        double facePos = camera.getLastDouble();
+        long age = System.currentTimeMillis() - camera.getTimestamp();
+        double delta = facePos - 0.5; // make position bewteen -0.5 and 0.5
+        double distance = Math.abs(delta);
+        double scale = SCALE * clamp(1 - ((age - MIN_AGE) / (MAX_AGE - MIN_AGE)));
+        double percentOutput = distance * scale * Math.signum(delta);
 
         rotateMotor.set(ControlMode.PercentOutput, percentOutput);
+        Thread.sleep(20);
     }
 
-    public void loop() throws InterruptedException {
-        facePos = camera.getLastDouble();
-        moveHead(facePos);
-        Thread.sleep(50);
+    private static double clamp(double x) {
+        return Math.min(Math.max(x, 0), 1);
     }
 }

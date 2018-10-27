@@ -8,7 +8,8 @@ public class JeVois extends Thread {
 
     private SerialPort camera;
     private String lastString;
-    private Double lastDouble = 0.5D;
+    private volatile double lastDouble = 0.5D;
+    private volatile long dataTimestamp;
 
     public JeVois() {
         this(SerialPort.Port.kUSB);
@@ -27,10 +28,10 @@ public class JeVois extends Thread {
                     System.out.println(lastString);
                     if (!lastString.equals("")) {
                         if (lastString.equals("None")) {
-                            lastDouble = 0.5;
+                            setDouble(0.5);
                         } else {
                             try {
-                                lastDouble = Double.valueOf(lastString);
+                                setDouble(Double.valueOf(lastString));
                             } catch (NumberFormatException exception) {
                             }
                         }
@@ -48,6 +49,15 @@ public class JeVois extends Thread {
         }
     }
 
+    private void setDouble(double x) {
+        lastDouble = x;
+        setTimestap();
+    }
+
+    private void setTimestap() {
+        dataTimestamp = System.currentTimeMillis();
+    }
+
     public void enable() {
         this.enabled = true;
     }
@@ -60,8 +70,12 @@ public class JeVois extends Thread {
         return lastString;
     }
 
-    public Double getLastDouble() {
+    public double getLastDouble() {
         return lastDouble;
+    }
+
+    public long getTimestamp() {
+        return dataTimestamp;
     }
 
 }
